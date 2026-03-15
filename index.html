@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahnaf Atique — Researcher | Educator | Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --bg: #0d1117;
+            --card: #161b22;
+            --border: #21262d;
+            --text: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #00d2ff;
+            --purple: #7928ca;
+            --gradient: linear-gradient(135deg, #00d2ff, #7928ca);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 0 40px;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 300px;
+            background: linear-gradient(180deg, rgba(121,40,202,0.15) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        .hero .tagline {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        .hero .links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,210,255,0.25); }
+        .btn-primary {
+            background: var(--gradient);
+            color: #fff;
+        }
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: var(--card);
+        }
+
+        /* Sections */
+        section { padding: 40px 0; }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+        .card:hover { border-color: var(--accent); }
+        .card h3 { font-size: 1.1rem; margin-bottom: 4px; }
+        .card .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px; }
+        .card ul { padding-left: 20px; color: var(--text-muted); font-size: 0.9rem; }
+        .card ul li { margin-bottom: 4px; }
+
+        /* Skills grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .skill-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .skill-card h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag {
+            background: rgba(0,210,255,0.1);
+            border: 1px solid rgba(0,210,255,0.2);
+            color: var(--text);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 16px;
+        }
+        .project-card h3 a { color: var(--text); }
+        .project-card h3 a:hover { color: var(--accent); }
+        .project-tech { margin-top: 10px; }
+
+        /* Awards */
+        .award-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .award-item:last-child { border-bottom: none; }
+        .award-icon {
+            font-size: 1.5rem;
+            min-width: 40px;
+            text-align: center;
+        }
+        .award-info h4 { font-size: 1rem; margin-bottom: 2px; }
+        .award-info p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Research pills */
+        .research-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .pill {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .pill:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .pill small { display: block; color: var(--text-muted); font-size: 0.75rem; font-weight: 400; }
+
+        /* Education */
+        .edu-item { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .edu-item .gpa {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+        footer .social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; }
+        footer .social-links a { color: var(--text-muted); font-size: 1.1rem; }
+        footer .social-links a:hover { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="container">
+        <h1>Ahnaf Atique</h1>
+        <p class="tagline">Researcher &middot; Educator &middot; Developer</p>
+        <p style="color: var(--text-muted); margin-bottom: 24px;">
+            Final-year CSE student @ United International University | Undergraduate Teaching Assistant
+        </p>
+        <div class="links">
+            <a href="https://raw.githubusercontent.com/ahnafwolfy007/ahnafwolfy007/main/Ahnaf_Atique_CV(Present).pdf" class="btn btn-primary" download>Download CV</a>
+            <a href="https://github.com/ahnafwolfy007" class="btn btn-outline">GitHub</a>
+            <a href="https://linkedin.com/in/ahnaf-atique-9a485b380" class="btn btn-outline">LinkedIn</a>
+            <a href="mailto:ahnafatique711@gmail.com" class="btn btn-outline">Email</a>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- About -->
+    <section>
+        <h2 class="section-title"><span>About</span></h2>
+        <p>I'm a final-year Computer Science & Engineering student at United International University (UIU), Bangladesh. My passion lies at the intersection of AI research and education. I currently serve as an Undergraduate Teaching Assistant, where I've taught SPL, Intro to CS, OOP, DSA, Microprocessor, and DBMS. My career goal is to pursue academia &mdash; teaching and research.</p>
+    </section>
+
+    <!-- Experience -->
+    <section>
+        <h2 class="section-title"><span>Experience</span></h2>
+        <div class="card">
+            <h3>Undergraduate Teaching Assistant (Part-time)</h3>
+            <div class="meta">United International University (UIU) &middot; Nov 2024 &ndash; Present</div>
+            <ul>
+                <li>Assisted faculty in conducting lab sessions and tutorials for undergraduate courses</li>
+                <li>Taught and supported instruction in SPL, Intro to CS, OOP, DSA, Microprocessor, and DBMS</li>
+                <li>Authored comprehensive LaTeX textbooks covering the full CSE curriculum</li>
+                <li>Selected as invigilator for the Fresher's Coding Challenge 2025</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+        <h2 class="section-title"><span>Education</span></h2>
+        <div class="card">
+            <div class="edu-item">
+                <div>
+                    <h3>B.Sc. in Computer Science & Engineering (Final Year)</h3>
+                    <div class="meta">United International University (UIU), Dhaka</div>
+                </div>
+                <div class="gpa">CGPA: 3.92/4.00</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="edu-item">
+                <div>
+                    <h3>Higher Secondary Certificate (HSC)</h3>
+                    <div class="meta">Comilla Victoria Govt. College</div>
+                </div>
+                <div class="gpa">GPA: 5.00/5.00</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="edu-item">
+                <div>
+                    <h3>Secondary School Certificate (SSC)</h3>
+                    <div class="meta">Comilla Zilla School</div>
+                </div>
+                <div class="gpa">GPA: 5.00/5.00</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Interests -->
+    <section>
+        <h2 class="section-title"><span>Research Interests</span></h2>
+        <div class="research-pills">
+            <div class="pill">Machine Learning<small>Predictive Modeling</small></div>
+            <div class="pill">Deep Learning<small>Neural Architectures</small></div>
+            <div class="pill">Explainable AI<small>Interpretable Models</small></div>
+            <div class="pill">HCI<small>Interaction Design</small></div>
+            <div class="pill">Bioinformatics<small>Computational Biology</small></div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+        <h2 class="section-title"><span>Projects</span></h2>
+        <div class="projects-grid">
+            <div class="card project-card">
+                <h3><a href="https://github.com/ahnafwolfy007/CSE-Teaching-Materials">CSE-Teaching-Materials</a></h3>
+                <div class="meta">Comprehensive LaTeX textbooks for the full CSE curriculum &mdash; C to ML</div>
+                <p style="font-size:0.9rem; color: var(--text-muted);">Self-contained books with worked examples, diagrams, exercises, and interview prep. Includes runnable code.</p>
+                <div class="tags project-tech"><span class="tag">LaTeX</span></div>
+            </div>
+            <div class="card project-card">
+                <h3><a href="https://github.com/ahnafwolfy007/POCD-KansformerEPI">POCD-KansformerEPI</a></h3>
+                <div class="meta">Enhancer-Promoter Interaction Prediction</div>
+                <p style="font-size:0.9rem; color: var(--text-muted);">Novel deep learning model using Kansformer architecture for bioinformatics research.</p>
+                <div class="tags project-tech"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">Deep Learning</span></div>
+            </div>
+            <div class="card project-card">
+                <h3><a href="https://github.com/ahnafwolfy007/DiaFact">DiaFact</a></h3>
+                <div class="meta">Diabetes Factor Analysis</div>
+                <p style="font-size:0.9rem; color: var(--text-muted);">ML pipeline with explainable AI techniques to identify key diabetes contributing factors.</p>
+                <div class="tags project-tech"><span class="tag">Python</span><span class="tag">ML</span><span class="tag">XAI</span></div>
+            </div>
+            <div class="card project-card">
+                <h3><a href="https://github.com/ahnafwolfy007/Holo-GNN">Holo-GNN</a></h3>
+                <div class="meta">Graph Neural Network Research</div>
+                <div class="tags project-tech"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">GNN</span></div>
+            </div>
+            <div class="card project-card">
+                <h3><a href="https://github.com/ahnafwolfy007/EduSync">EduSync</a></h3>
+                <div class="meta">Full-stack educational platform for academic management</div>
+                <div class="tags project-tech"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span></div>
+            </div>
+            <div class="card project-card">
+                <h3><a href="https://github.com/ahnafwolfy007/PillTrack">PillTrack</a></h3>
+                <div class="meta">Medication tracking application</div>
+                <div class="tags project-tech"><span class="tag">Web</span></div>
+            </div>
+            <div class="card project-card">
+                <h3><a href="https://github.com/ahnafwolfy007/Mr.Bin">Mr.Bin</a></h3>
+                <div class="meta">IoT-based smart waste management system</div>
+                <div class="tags project-tech"><span class="tag">Arduino</span><span class="tag">ESP32</span><span class="tag">IoT</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section>
+        <h2 class="section-title"><span>Skills</span></h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h4>Languages</h4>
+                <div class="tags">
+                    <span class="tag">C</span><span class="tag">C++</span><span class="tag">Python</span><span class="tag">Java</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h4>Web Technologies</h4>
+                <div class="tags">
+                    <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Spring Boot</span><span class="tag">Tailwind CSS</span><span class="tag">Bootstrap</span><span class="tag">REST APIs</span><span class="tag">XAMPP</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h4>Databases</h4>
+                <div class="tags">
+                    <span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Firebase</span><span class="tag">Mongoose</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h4>AI / ML</h4>
+                <div class="tags">
+                    <span class="tag">PyTorch</span><span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Jupyter</span><span class="tag">Google Colab</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h4>Embedded Systems & IoT</h4>
+                <div class="tags">
+                    <span class="tag">Arduino</span><span class="tag">ESP32</span><span class="tag">Logisim</span><span class="tag">Proteus</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h4>Tools & IDEs</h4>
+                <div class="tags">
+                    <span class="tag">Git</span><span class="tag">VS Code</span><span class="tag">IntelliJ</span><span class="tag">Code Blocks</span><span class="tag">Postman</span><span class="tag">Cisco Packet Tracer</span><span class="tag">Figma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards -->
+    <section>
+        <h2 class="section-title"><span>Honors & Awards</span></h2>
+        <div class="card">
+            <div class="award-item">
+                <div class="award-icon">🎓</div>
+                <div class="award-info">
+                    <h4>Merit-Based Scholarship &mdash; Every Semester</h4>
+                    <p>100% tuition waiver (5 times), 50% (2 times), 25% (3 times) at UIU</p>
+                </div>
+            </div>
+            <div class="award-item">
+                <div class="award-icon">🏅</div>
+                <div class="award-info">
+                    <h4>Microprocessor Project Show &mdash; Prize Winner</h4>
+                    <p>Awarded for innovative hardware project at UIU</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional -->
+    <section>
+        <h2 class="section-title"><span>Additional Info</span></h2>
+        <div class="card">
+            <p><strong>Languages:</strong> Bangla (Native), English (Proficient), Hindi (Conversational)</p>
+            <p style="margin-top: 8px;"><strong>Hobby:</strong> Football, Piano, Gaming </p>
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="social-links">
+            <a href="https://github.com/ahnafwolfy007">GitHub</a>
+            <a href="https://linkedin.com/in/ahnaf-atique-9a485b380">LinkedIn</a>
+            <a href="mailto:ahnafatique711@gmail.com">Email</a>
+        </div>
+        <p>&copy; 2025 Ahnaf Atique. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
