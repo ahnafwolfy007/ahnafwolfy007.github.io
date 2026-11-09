@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahnaf Atique</title>
+    <meta name="description" content="Ahnaf Atique: CSE undergraduate at United International University. Research in Machine Learning, Computer Vision and Computational Biology.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fbfbfa;
+            --surface: #ffffff;
+            --surface-2: #f3f4f6;
+            --border: #e5e7eb;
+            --text: #1f2937;
+            --text-muted: #6b7280;
+            --accent: #1d4ed8;
+            --accent-soft: rgba(29, 78, 216, 0.08);
+            --green: #047857;
+            --green-soft: rgba(4, 120, 87, 0.1);
+            --amber: #b45309;
+            --amber-soft: rgba(180, 83, 9, 0.1);
+            --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #0e1116;
+                --surface: #161b22;
+                --surface-2: #1c222b;
+                --border: #2a313c;
+                --text: #e6e8eb;
+                --text-muted: #9aa4b2;
+                --accent: #7aa2ff;
+                --accent-soft: rgba(122, 162, 255, 0.12);
+                --green: #4ade80;
+                --green-soft: rgba(74, 222, 128, 0.12);
+                --amber: #fbbf24;
+                --amber-soft: rgba(251, 191, 36, 0.12);
+                --shadow: none;
+            }
+        }
+        :root[data-theme="dark"] {
+            --bg: #0e1116;
+            --surface: #161b22;
+            --surface-2: #1c222b;
+            --border: #2a313c;
+            --text: #e6e8eb;
+            --text-muted: #9aa4b2;
+            --accent: #7aa2ff;
+            --accent-soft: rgba(122, 162, 255, 0.12);
+            --green: #4ade80;
+            --green-soft: rgba(74, 222, 128, 0.12);
+            --amber: #fbbf24;
+            --amber-soft: rgba(251, 191, 36, 0.12);
+            --shadow: none;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            font-size: 16px;
+            transition: background 0.2s, color 0.2s;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; text-underline-offset: 3px; }
+        h1, h2, h3 { font-family: 'Source Serif 4', Georgia, serif; line-height: 1.3; }
+        svg.icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+        /* Top nav */
+        .nav {
+            position: sticky; top: 0; z-index: 10;
+            background: color-mix(in srgb, var(--bg) 85%, transparent);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1120px; margin: 0 auto; padding: 0 24px;
+            height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+        }
+        .nav-brand { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 1.1rem; color: var(--text); white-space: nowrap; }
+        .nav-brand:hover { text-decoration: none; }
+        .nav-links { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+        .nav-links::-webkit-scrollbar { display: none; }
+        .nav-links a {
+            color: var(--text-muted); font-size: 0.875rem; font-weight: 500;
+            padding: 6px 10px; border-radius: 6px; white-space: nowrap;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--surface-2); text-decoration: none; }
+        .theme-toggle {
+            background: none; border: 1px solid var(--border); color: var(--text-muted);
+            width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
+            display: grid; place-items: center; flex-shrink: 0;
+        }
+        .theme-toggle:hover { color: var(--text); background: var(--surface-2); }
+
+        /* Layout */
+        .layout {
+            max-width: 1120px; margin: 0 auto; padding: 48px 24px 24px;
+            display: grid; grid-template-columns: 280px 1fr; gap: 56px;
+        }
+
+        /* Sidebar profile */
+        .profile { position: sticky; top: 88px; align-self: start; }
+        .avatar {
+            width: 180px; height: 180px; border-radius: 50%;
+            object-fit: cover; object-position: center 25%;
+            border: 4px solid var(--surface); box-shadow: 0 0 0 1px var(--border), var(--shadow);
+            display: block; margin-bottom: 20px; background: var(--surface-2);
+        }
+        .avatar-fallback {
+            width: 180px; height: 180px; border-radius: 50%;
+            display: grid; place-items: center; margin-bottom: 20px;
+            background: var(--accent-soft); color: var(--accent);
+            font-family: 'Source Serif 4', serif; font-size: 3.5rem; font-weight: 600;
+        }
+        .profile h1 { font-size: 1.9rem; margin-bottom: 4px; }
+        .profile .role { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px; }
+        .profile .affil { font-size: 0.9rem; margin-bottom: 20px; }
+        .profile .affil strong { display: block; font-weight: 600; }
+        .profile .affil span { color: var(--text-muted); }
+        .contact-list { list-style: none; display: grid; gap: 8px; margin-bottom: 24px; font-size: 0.9rem; }
+        .contact-list li { display: flex; align-items: center; gap: 10px; color: var(--text-muted); min-width: 0; }
+        .contact-list a { color: var(--text); overflow-wrap: anywhere; }
+        .btn-cv {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--accent); color: #fff; font-weight: 500; font-size: 0.9rem;
+            padding: 10px 18px; border-radius: 8px;
+        }
+        :root[data-theme="dark"] .btn-cv { color: #0e1116; }
+        @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-cv { color: #0e1116; } }
+        .btn-cv:hover { text-decoration: none; filter: brightness(1.08); }
+
+        /* Content */
+        main section { padding-bottom: 48px; }
+        .section-title {
+            font-size: 1.45rem; margin-bottom: 20px; padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+        }
+        .section-title small { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 400; color: var(--text-muted); }
+        .lead { font-size: 1.05rem; }
+        .lead + .lead { margin-top: 12px; }
+
+        .interests { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .interest {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--accent-soft); color: var(--accent);
+            padding: 6px 14px; border-radius: 999px; font-size: 0.875rem; font-weight: 500;
+        }
+
+        .card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+            padding: 22px 24px; box-shadow: var(--shadow);
+        }
+        .card + .card { margin-top: 14px; }
+        .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+        .entry-head h3 { font-size: 1.1rem; font-weight: 600; }
+        .date { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+        .meta { color: var(--text-muted); font-size: 0.9rem; margin-top: 2px; }
+        .card ul { margin-top: 12px; padding-left: 20px; font-size: 0.95rem; }
+        .card ul li + li { margin-top: 4px; }
+
+        /* Thesis highlight */
+        .thesis { border-left: 3px solid var(--accent); }
+        .thesis-label {
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 6px;
+        }
+        .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+        .stat { background: var(--surface-2); border-radius: 8px; padding: 10px 16px; min-width: 140px; }
+        .stat b { display: block; font-family: 'Source Serif 4', serif; font-size: 1.5rem; color: var(--accent); line-height: 1.2; }
+        .stat span { font-size: 0.8rem; color: var(--text-muted); }
+        .link-inline { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 500; margin-top: 14px; }
+
+        /* Publications */
+        .pubs { list-style: none; counter-reset: pub; }
+        .pubs li {
+            counter-increment: pub; position: relative;
+            padding: 14px 0 14px 44px; border-bottom: 1px solid var(--border);
+        }
+        .pubs li:last-child { border-bottom: none; }
+        .pubs li::before {
+            content: "[" counter(pub) "]"; position: absolute; left: 0; top: 14px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted);
+        }
+        .pub-title { font-weight: 600; font-size: 1rem; }
+        .badge {
+            display: inline-block; margin-top: 6px;
+            font-size: 0.75rem; font-weight: 500; padding: 2px 10px; border-radius: 999px;
+        }
+        .badge.ready { background: var(--green-soft); color: var(--green); }
+        .badge.prep { background: var(--amber-soft); color: var(--amber); }
+
+        /* Teaching */
+        .courses { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 14px; }
+        .course {
+            background: var(--surface-2); border-radius: 8px; padding: 8px 12px; font-size: 0.875rem;
+        }
+
+        /* Education */
+        .score { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); font-weight: 500; }
+
+        /* Projects */
+        .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .projects .card { margin: 0; display: flex; flex-direction: column; transition: border-color 0.15s, transform 0.15s; }
+        .projects .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .project-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+        .project-top h3 { font-size: 1.02rem; font-weight: 600; }
+        .project-top a { color: var(--text-muted); display: grid; place-items: center; }
+        .project-top a:hover { color: var(--accent); }
+        .project-desc { font-size: 0.9rem; color: var(--text-muted); margin: 8px 0 14px; flex: 1; }
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+            background: var(--surface-2); color: var(--text-muted);
+            padding: 3px 8px; border-radius: 4px;
+        }
+
+        /* Skills */
+        .skills { display: grid; gap: 16px; }
+        .skill-row { display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: baseline; }
+        .skill-row h4 { font-size: 0.9rem; font-weight: 600; }
+
+        /* Awards */
+        .award { display: flex; gap: 16px; }
+        .award + .award { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); }
+        .award-icon {
+            width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+            background: var(--accent-soft); color: var(--accent); display: grid; place-items: center;
+        }
+        .award-icon svg { width: 20px; height: 20px; }
+        .award h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; }
+
+        footer {
+            max-width: 1120px; margin: 0 auto; padding: 32px 24px 48px;
+            color: var(--text-muted); font-size: 0.85rem; text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 900px) {
+            .layout { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; }
+            .profile { position: static; text-align: center; }
+            .avatar, .avatar-fallback { margin-left: auto; margin-right: auto; width: 150px; height: 150px; }
+            .contact-list { justify-items: center; }
+            .nav-brand { display: none; }
+        }
+        @media (max-width: 640px) {
+            .layout { padding-left: 16px; padding-right: 16px; }
+            .nav-inner { padding: 0 16px; }
+            .projects, .courses { grid-template-columns: 1fr; }
+            .skill-row { grid-template-columns: 1fr; gap: 6px; }
+            .card { padding: 18px; }
+            .pubs li { padding-left: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Icon sprites -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.5H3.5V9h3.6v11.5ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm18 2-10 7L2 6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Zm0-9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></symbol>
+    <symbol id="i-school" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 10 12 5 2 10l10 5 10-5Zm-16 2v5c3 2.5 9 2.5 12 0v-5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0 5-5m-5 5-5-5M4 21h16"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm-3.5-1L7 22l5-3 5 3-1.5-8"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 7h10v10H7zM10 2v3m4-3v3m-4 14v3m4-3v3M2 10h3m-3 4h3m14-4h3m-3 4h3"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8 1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></symbol>
+</svg>
+
+<!-- Navigation -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="#about" class="nav-brand">Ahnaf Atique</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#research">Research</a>
+            <a href="#teaching">Teaching</a>
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#awards">Awards</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+            <svg class="icon"><use href="#i-moon"/></svg>
+        </button>
+    </div>
+</nav>
+
+<div class="layout">
+
+    <!-- Profile sidebar -->
+    <aside class="profile">
+        <img class="avatar" src="Ahnaf_Atique.png" alt="Portrait of Ahnaf Atique"
+             onerror="this.outerHTML='<div class=&quot;avatar-fallback&quot;>AA</div>'">
+        <h1>Ahnaf Atique</h1>
+        <p class="role">Researcher &middot; Educator</p>
+        <p class="affil">
+            <strong>United International University</strong>
+            <span>B.Sc. in Computer Science and Engineering</span>
+        </p>
+        <ul class="contact-list">
+            <li><svg class="icon"><use href="#i-pin"/></svg>Dhaka, Bangladesh</li>
+            <li><svg class="icon"><use href="#i-mail"/></svg><a href="mailto:ahnafatique711@gmail.com">ahnafatique711@gmail.com</a></li>
+            <li><svg class="icon"><use href="#i-github"/></svg><a href="https://github.com/ahnafwolfy007">github.com/ahnafwolfy007</a></li>
+            <li><svg class="icon"><use href="#i-linkedin"/></svg><a href="https://linkedin.com/in/ahnaf-atique-9a485b380">LinkedIn</a></li>
+        </ul>
+        <a class="btn-cv" href="Ahnaf_Atique_CV.pdf" download>
+            <svg class="icon"><use href="#i-download"/></svg>Download CV
+        </a>
+    </aside>
+
+    <main>
+
+        <!-- About -->
+        <section id="about">
+            <h2 class="section-title">About</h2>
+            <p class="lead">I am a final-year Computer Science and Engineering undergraduate at United International University (UIU), Dhaka, with a strong interest in teaching and research.</p>
+            <p class="lead">My experience as an Undergraduate Teaching Assistant in six core courses has deepened my commitment to helping students learn. My research focuses on building machine learning models that are accurate, honestly evaluated and useful in practice. I seek to learn from experienced faculty, contribute to meaningful research, and grow as both a teacher and a researcher.</p>
+            <div class="interests">
+                <span class="interest">Machine Learning</span>
+                <span class="interest">Computer Vision</span>
+                <span class="interest">Computational Biology</span>
+            </div>
+        </section>
+
+        <!-- Research -->
+        <section id="research">
+            <h2 class="section-title">Research</h2>
+
+            <div class="card thesis">
+                <div class="thesis-label">Undergraduate Thesis (FYDP)</div>
+                <div class="entry-head">
+                    <h3>Enhancing Enhancer&ndash;Promoter Interaction Prediction via Gene Regulatory Inference and Hybrid Deep Learning Architectures (SLIM)</h3>
+                </div>
+                <div class="meta">Supervisor: Dr. Riasat Azim, Associate Professor, Dept. of CSE, UIU &middot; <span class="date">Sep 2026</span></div>
+                <ul>
+                    <li>Built a memory-based deep learning model for gene-regulation prediction and a leakage-free evaluation protocol</li>
+                    <li>Matched the performance of a published baseline at a fraction of the cost</li>
+                </ul>
+                <div class="stats">
+                    <div class="stat"><b>2.3&times;</b><span>faster than baseline</span></div>
+                    <div class="stat"><b>50%</b><span>less GPU memory</span></div>
+                </div>
+                <a class="link-inline" href="https://github.com/MdAhbab/SLIM"><svg class="icon"><use href="#i-github"/></svg>Code on GitHub</a>
+            </div>
+
+            <h3 style="font-size:1.1rem; margin: 32px 0 4px;">Manuscripts</h3>
+            <ol class="pubs">
+                <li>
+                    <div class="pub-title">SLIM: Selective Memory and Leakage-Controlled Evaluation for Enhancer&ndash;Promoter Interaction Prediction</div>
+                    <span class="badge ready">Ready for submission</span>
+                </li>
+                <li>
+                    <div class="pub-title">Holo-GeoN: Structure-Free, Physics-Constrained Prediction of Mutation Effects on Protein Stability and Pathogenicity</div>
+                    <span class="badge ready">Ready for submission</span>
+                </li>
+                <li>
+                    <div class="pub-title">Bounded Waiting Time in Sensor-Driven Waste Collection: A Reserved-Head Dispatch Rule for Prize-Collecting Vehicle Routing</div>
+                    <span class="badge ready">Ready for submission</span>
+                </li>
+                <li>
+                    <div class="pub-title">Entity Leakage Overstates Measured Fraud-Detection Accuracy on IEEE-CIS</div>
+                    <span class="badge prep">Manuscript in preparation</span>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Teaching -->
+        <section id="teaching">
+            <h2 class="section-title">Teaching</h2>
+            <div class="card">
+                <div class="entry-head">
+                    <h3>Undergraduate Teaching Assistant (Part-time)</h3>
+                    <span class="date">Nov 2024 &ndash; Oct 2026</span>
+                </div>
+                <div class="meta">United International University (UIU), Dhaka</div>
+                <ul>
+                    <li>Assisted faculty in conducting lab sessions and tutorials for six core undergraduate courses</li>
+                    <li>Selected as invigilator for the Freshers' Coding Challenge 2025</li>
+                </ul>
+                <div class="courses">
+                    <div class="course">Introduction to Computer Systems</div>
+                    <div class="course">Data Structures and Algorithms</div>
+                    <div class="course">Structured Programming Language</div>
+                    <div class="course">Microprocessors and Microcontrollers</div>
+                    <div class="course">Object Oriented Programming</div>
+                    <div class="course">Database Management Systems</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="card">
+                <div class="entry-head">
+                    <h3>B.Sc. in Computer Science and Engineering</h3>
+                    <span class="date">2026</span>
+                </div>
+                <div class="meta">United International University (UIU), Dhaka &middot; <span class="score">CGPA 3.94 / 4.00</span></div>
+            </div>
+            <div class="card">
+                <div class="entry-head">
+                    <h3>Higher Secondary Certificate (HSC)</h3>
+                    <span class="date">2021</span>
+                </div>
+                <div class="meta">Comilla Victoria Govt. College, Comilla &middot; <span class="score">GPA 5.00 / 5.00</span></div>
+            </div>
+            <div class="card">
+                <div class="entry-head">
+                    <h3>Secondary School Certificate (SSC)</h3>
+                    <span class="date">2019</span>
+                </div>
+                <div class="meta">Comilla Zilla School, Comilla &middot; <span class="score">GPA 5.00 / 5.00</span></div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects">
+                <div class="card">
+                    <div class="project-top">
+                        <h3>Radflow-EDGE</h3>
+                        <a href="https://github.com/ahnafwolfy007/Radflow-EDGE" aria-label="Radflow-EDGE on GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+                    </div>
+                    <p class="project-desc">Offline, edge-native AI system that lets a single rural health worker perform chest X-ray triage without cloud access.</p>
+                    <div class="tags"><span class="tag">Medical Imaging</span><span class="tag">Edge AI</span></div>
+                </div>
+                <div class="card">
+                    <div class="project-top">
+                        <h3>AI-CLI-Orchestrator</h3>
+                        <a href="https://github.com/ahnafwolfy007/AI--CLI-Orchestrator" aria-label="AI-CLI-Orchestrator on GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+                    </div>
+                    <p class="project-desc">Production-oriented multi-agent system in which a central orchestrator (Grok, Gemini, DeepSeek) plans tasks and routes them to parallel CLI coding agents.</p>
+                    <div class="tags"><span class="tag">Multi-Agent Systems</span><span class="tag">LLMs</span></div>
+                </div>
+                <div class="card">
+                    <div class="project-top">
+                        <h3>NOVIS: Non-Optical Visual Inference</h3>
+                        <a href="https://github.com/ahnafwolfy007/NOVIS-model-IoT" aria-label="NOVIS on GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+                    </div>
+                    <p class="project-desc">Reconstructs grayscale images, metric depth and inferred color from a 32&times;24 thermopile array, ultrasonic ranges and chirp echoes, with no camera at inference time. Includes a custom sensing device.</p>
+                    <div class="tags"><span class="tag">Computer Vision</span><span class="tag">IoT</span><span class="tag">Sensor Fusion</span></div>
+                </div>
+                <div class="card">
+                    <div class="project-top">
+                        <h3>DiaFact</h3>
+                        <a href="https://github.com/ahnafwolfy007/DiaFact" aria-label="DiaFact on GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+                    </div>
+                    <p class="project-desc">Machine learning pipeline for diabetes factor analysis using explainable AI techniques.</p>
+                    <div class="tags"><span class="tag">Machine Learning</span><span class="tag">Explainable AI</span></div>
+                </div>
+                <div class="card">
+                    <div class="project-top">
+                        <h3>Personalized Diet Recommendation</h3>
+                        <a href="https://github.com/ahnafwolfy007/Personalized-Diet-Recommendation" aria-label="Personalized Diet Recommendation on GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+                    </div>
+                    <p class="project-desc">Web application offering tailored dietary guidance, personalized meal plans and real-time calorie tracking, connected with professional dietitians.</p>
+                    <div class="tags"><span class="tag">Web Application</span></div>
+                </div>
+                <div class="card">
+                    <div class="project-top">
+                        <h3>EduSync</h3>
+                        <a href="https://github.com/ahnafwolfy007/EduSync" aria-label="EduSync on GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+                    </div>
+                    <p class="project-desc">One-stop platform for streamlined campus life management.</p>
+                    <div class="tags"><span class="tag">Web Application</span></div>
+                </div>
+                <div class="card">
+                    <div class="project-top">
+                        <h3>PillTrack</h3>
+                        <a href="https://github.com/ahnafwolfy007/PillTrack" aria-label="PillTrack on GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+                    </div>
+                    <p class="project-desc">Medication tracking application that helps users manage their prescriptions.</p>
+                    <div class="tags"><span class="tag">Health Application</span></div>
+                </div>
+                <div class="card">
+                    <div class="project-top">
+                        <h3>Mr.Bin</h3>
+                        <a href="https://github.com/ahnafwolfy007/Mr.Bin" aria-label="Mr.Bin on GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+                    </div>
+                    <p class="project-desc">IoT-based smart waste bin designed and built with embedded systems.</p>
+                    <div class="tags"><span class="tag">IoT</span><span class="tag">Embedded Systems</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="card skills">
+                <div class="skill-row">
+                    <h4>Programming Languages</h4>
+                    <div class="tags"><span class="tag">Python</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">Java</span><span class="tag">JavaScript</span><span class="tag">SQL</span></div>
+                </div>
+                <div class="skill-row">
+                    <h4>Machine Learning &amp; Vision</h4>
+                    <div class="tags"><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Scikit-learn</span><span class="tag">OpenCV</span><span class="tag">Hugging Face</span><span class="tag">SHAP</span><span class="tag">NumPy</span><span class="tag">Pandas</span></div>
+                </div>
+                <div class="skill-row">
+                    <h4>Embedded Systems &amp; Edge AI</h4>
+                    <div class="tags"><span class="tag">Raspberry Pi</span><span class="tag">ESP32</span><span class="tag">Arduino</span><span class="tag">Proteus</span><span class="tag">Logisim</span><span class="tag">Cisco Packet Tracer</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards -->
+        <section id="awards">
+            <h2 class="section-title">Honors &amp; Awards</h2>
+            <div class="card">
+                <div class="award">
+                    <div class="award-icon"><svg><use href="#i-school"/></svg></div>
+                    <div>
+                        <h3>Merit-Based Scholarship, every trimester</h3>
+                        <p class="meta">United International University &middot; 100% tuition waiver (7 times), 50% (2 times), 25% (3 times)</p>
+                    </div>
+                </div>
+                <div class="award">
+                    <div class="award-icon"><svg><use href="#i-chip"/></svg></div>
+                    <div>
+                        <h3>Prize Winner, Microprocessor Project Show</h3>
+                        <p class="meta">United International University &middot; Awarded for an innovative hardware project</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<footer>
+    &copy; 2026 Ahnaf Atique &middot; Dhaka, Bangladesh
+</footer>
+
+<script>
+    // Theme toggle (remembers the choice when storage is available)
+    (function () {
+        const root = document.documentElement;
+        const btn = document.getElementById('themeToggle');
+        let saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (e) {}
+        if (saved) root.setAttribute('data-theme', saved);
+
+        function isDark() {
+            const t = root.getAttribute('data-theme');
+            if (t) return t === 'dark';
+            return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        function syncIcon() {
+            btn.innerHTML = '<svg class="icon"><use href="#' + (isDark() ? 'i-sun' : 'i-moon') + '"/></svg>';
+        }
+        btn.addEventListener('click', function () {
+            const next = isDark() ? 'light' : 'dark';
+            root.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) {}
+            syncIcon();
+        });
+        syncIcon();
+    })();
+
+    // Highlight the nav link for the section in view
+    (function () {
+        const links = document.querySelectorAll('.nav-links a');
+        const map = {};
+        links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting && map[e.target.id]) {
+                    links.forEach(function (a) { a.classList.remove('active'); });
+                    map[e.target.id].classList.add('active');
+                }
+            });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        document.querySelectorAll('main section').forEach(function (s) { observer.observe(s); });
+    })();
+</script>
+
+</body>
+</html>
